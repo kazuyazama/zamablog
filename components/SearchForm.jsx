@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import Link from "next/link"
-import { BiSearch } from "react-icons/Bi"
+import { BiSearch } from "react-icons/bi"
 
 
 export default function SearchForm() {

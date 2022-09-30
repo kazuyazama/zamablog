@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { GrContact } from "react-icons/Gr"
+import { GrContact } from "react-icons/gr"
 
 const Header = () => {
     return (
