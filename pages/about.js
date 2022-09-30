@@ -1,4 +1,5 @@
 
+import Image from "next/image";
 import Layout from "../components/Layout";
 
 const About = () => {
@@ -49,8 +50,8 @@ const About = () => {
         <div className="camera"></div> 
         <div className="display">
             <div className="artboard artboard-demo phone-1">
-                <img src="https://images.microcms-assets.io/assets/b5a02812e4554b0795bbc72514d3cf69/eb9c29e4d2014abea9c2afa91e43d608/IMG_7467.JPG" 
-                 alt="座間のブログ" />
+                <Image loader={({src}) => src} src="https://images.microcms-assets.io/assets/b5a02812e4554b0795bbc72514d3cf69/eb9c29e4d2014abea9c2afa91e43d608/IMG_7467.JPG" 
+                 alt="座間のブログ" width={350} height={450}  />
                 
             </div>
         </div>
