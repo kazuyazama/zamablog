@@ -3,7 +3,6 @@ import axios from "axios";
 import Link from "next/link"
 import { BiSearch } from "react-icons/bi"
 
-
 export default function SearchForm() {
     const [keyword, setKeyword] = useState("");
     const [blogs, setBlogs] = useState([]);

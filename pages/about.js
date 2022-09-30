@@ -14,7 +14,7 @@ const About = () => {
         <div className="basis-3/6">
         {/* <div className="col-span-4 col-start-2"> */}
             <h1 className="text-2xl pb-5">ざまのブログ</h1>
-            <p className="leading-relaxed">座間和也（ざまかずや）現在28歳</p>
+            <p className="leading-relaxed">座間和也（ざまかずや）現在28歳a</p>
             <p className="leading-relaxed">神奈川県川崎市生まれ、東京都町田市在住</p>
             <p className="leading-relaxed">通信業界10年目で某ネット回線代理店の社長やってます。</p>
             <ul className="leading-relaxed list-decimal py-2">

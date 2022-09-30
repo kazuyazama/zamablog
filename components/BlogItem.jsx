@@ -8,9 +8,7 @@ const BlogItem = ({blog}) => {
         <Image className="py-5" loader={({src}) => src} src={blog.image.url} alt={blog.title} width={800} height={500} layout="responsive" 
            />
 
-        
-
-        <Moment format="YYYY/MM/DD"  >
+        <Moment format="YYYY/MM/DD">
         <p >{blog.publishedAt}</p>
         </Moment>
         <h1 className="text-4xl py-3">{blog.title}</h1>

@@ -15,9 +15,8 @@ export default function Home({blog,category}) {
     pageTitle="ざまのブログ"
     />
     <Layout>
-
     <main className="container mx-auto">
-      <contaier className="flex flex-row">
+      <container className="flex flex-row">
 
         <div className="basis-3/4">
           <BlogIndex blog={blog} />
@@ -29,7 +28,7 @@ export default function Home({blog,category}) {
         
         </div>
 
-      </contaier>   
+      </container>   
     </main>
     </Layout>
 
