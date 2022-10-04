@@ -1,4 +1,3 @@
-import { html } from "daisyui/dist/base";
 import Image from "next/image";
 import Moment from "react-moment";
 
@@ -17,7 +16,7 @@ const BlogItem = ({blog}) => {
         <h3>{blog.description}</h3>
         <div className="pt-3 pb-7 flex justify-end">
                 {blog.tags.map((tag) => (
-                    <div className="badge badge-outline ml-2" key={tag} >{tag}</div> 
+                    <div className="badge badge-accent ml-2" key={tag} >{tag}</div> 
                    
                 ))}
         </div>

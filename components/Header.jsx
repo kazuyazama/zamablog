@@ -9,7 +9,7 @@ const Header = () => {
         </div>
         <div className="navbar-center ">
             <Link href="/">
-            <a className="btn btn-ghost normal-case text-2xl">ざまのブログ</a>
+            <a className="btn btn-ghost text-secondary normal-case text-2xl">ざまのブログ</a>
             </Link>
         </div>
         <div className="navbar-end">
@@ -26,10 +26,10 @@ const Header = () => {
         </div>
         <div className="tabs flex justify-center">
             <Link href="/">
-            <a className="tab tab-active text-xl">Blog</a> 
+            <a className="tab tab-active text-xl">BLOG</a> 
             </Link>
             <Link href="/about">
-            <a className="tab text-xl">about</a> 
+            <a className="tab text-xl">ABOUT</a> 
             </Link>
 
            

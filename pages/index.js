@@ -4,20 +4,16 @@ import CategoryIndex from "../components/CategoryIndex";
 import SearchForm from "../components/SearchForm";
 import Seo from "../components/Seo";
 
+
 export default function Home({blog,category}) {
   return (
     <>
-    <Seo 
-    pageTitle="ざまのブログ"
-    />
+    <Seo />
     <div className="container mx-auto">
       <div className="md:flex flex-row">
 
         <div className="px-8 md:px-auto basis-3/4 ">
           <BlogIndex blog={blog} />
-       
-
-
 
         </div>
          
@@ -29,6 +25,9 @@ export default function Home({blog,category}) {
 
       </div>   
     </div>
+
+
+    
     
 
     

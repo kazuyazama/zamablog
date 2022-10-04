@@ -28,8 +28,8 @@ export default function SearchForm() {
     <>
     
       <div className="card">
-        <div className="flex card-body form-control">
-          <h3>ブログ内検索</h3>
+        <div className="flex card-body form-control ">
+          <h3 className="pl-2">ブログ内検索</h3>
         <div className="flex input-group">  
         <input 
           placeholder="キーワードを入力"
@@ -55,7 +55,7 @@ export default function SearchForm() {
         {((blogs.length > 0 && action == true) || (action == false)) ?
           blogs.map((blog, index) => (
             <div
-              className="card w-80 bg-base-100 drop-shadow-md my-1 "
+              className="card w-80 bg-base-100 drop-shadow-xl my-2 "
               key={index}
             >
               <div className="card-body py-2">

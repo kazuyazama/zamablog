@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 import {init,send} from '@emailjs/browser';
+import Seo from "../components/Seo";
 
 const Form = () => {
     const { register,handleSubmit,reset,formState:{ errors }} = useForm();
-
     
     const onSubmit = (formData) => {
 
@@ -22,10 +22,10 @@ const Form = () => {
 
           
             send(serviceID,templateID ,formData)
-            .then((result) => {
-            alert(result.text);
-            }, (error) => {
-            alert(error.text);
+            .then(() => {
+            alert('送信完了しました');
+            }, () => {
+            alert('送信出来ませんでした');
             })
             reset();
         }
@@ -33,6 +33,7 @@ const Form = () => {
    
     return (
         <>
+        <Seo pageTitle="お問い合わせ" pageDescription="お問い合わせページです。"/>
         <div className="container mx-auto px-8 md:px-40">
 
         <div className="w-full ">

@@ -9,8 +9,8 @@ const Seo = ({ pageTitle, pageDescription, pagePath, pageImg, pageImgWidth, page
   const description = pageDescription ? pageDescription : defaultDescription;
   const url = pagePath;
   const imgUrl = pageImg ? pageImg : defautlImg;
-  // const imgWidth = pageImgWidth ? pageImgWidth : 1200;
-  // const imgHeight = pageImgHeight ? pageImgHeight : 630;
+  const imgWidth = pageImgWidth ? pageImgWidth : 1200;
+  const imgHeight = pageImgHeight ? pageImgHeight : 630;
 
   return (
     <Head>
@@ -23,8 +23,8 @@ const Seo = ({ pageTitle, pageDescription, pagePath, pageImg, pageImgWidth, page
       <meta property="og:description" content={description} />
       <meta property="og:type" content="website" />
       <meta property="og:image" content={imgUrl} />
-      {/* <meta property="og:image:width" content={String(imgWidth)} />
-      <meta property="og:image:height" content={String(imgHeight)} /> */}
+      <meta property="og:image:width" content={String(imgWidth)} />
+      <meta property="og:image:height" content={String(imgHeight)} />
       <link rel="canonical" href={url} />
     </Head>
   );

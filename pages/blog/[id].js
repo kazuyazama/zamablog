@@ -2,17 +2,16 @@ import { client } from "../../libs/client";
 import Seo from "../../components/Seo";
 import CategoryIndex from "../../components/CategoryIndex";
 import BlogItem from "../../components/BlogItem";
+import SearchForm from "../../components/SearchForm";
 
-export default function BlogId({ blog }) {
+export default function BlogId({ blog,category }) {
     return (
     <>
-        <Seo
+        <Seo  
         pageTitle={blog.title}
-        pageDescription={blog.body}
+        pageDescription={blog.description}
         pageImg={blog.image.url}
-        // pageImgWidth={1280}
-        // pageImgHeight={960}
-      />
+        />
       <main className="container mx-auto">
       <contaier className="md:flex flex-row">
 
@@ -21,6 +20,8 @@ export default function BlogId({ blog }) {
         </div>
 
         <div className="basis-1/4">
+          <CategoryIndex category={category}/>
+          <SearchForm />
          
         
         </div>
@@ -44,10 +45,16 @@ export default function BlogId({ blog }) {
   export const getStaticProps = async (context) => {
     const id = context.params.id;
     const data = await client.get({endpoint:"blog",contentId:id});
+     
+  // カテゴリーコンテンツの取得
+    const categoryData = await client.get({endpoint:"categories"})
     return {
         props:{
             blog:data,
+            category:categoryData.contents,
         }
     }
   }
 
+
+  
