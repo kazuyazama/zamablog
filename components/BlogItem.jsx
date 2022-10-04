@@ -1,7 +1,9 @@
+import { html } from "daisyui/dist/base";
 import Image from "next/image";
 import Moment from "react-moment";
 
 const BlogItem = ({blog}) => {
+
     return (
         <div>
         {/* <img loader={({src}) => src} src={`${blog.image.url}?fm=webp`} alt={blog.title} className="py-5" /> */}
@@ -16,14 +18,22 @@ const BlogItem = ({blog}) => {
         <div className="pt-3 pb-7 flex justify-end">
                 {blog.tags.map((tag) => (
                     <div className="badge badge-outline ml-2" key={tag} >{tag}</div> 
+                   
                 ))}
         </div>
 
-        <div
-          dangerouslySetInnerHTML={{
-            __html: `${blog.body}`,
-          }}
-        />
+        <div 
+        dangerouslySetInnerHTML={{
+          __html:blog.body.map((item, i) => 
+            item.fieldId === 'richEditor' ? (
+             `${item.richEditor}`
+            ) : item.fieldId === 'html' ? (
+              `${item.html}` 
+            ) : null )
+        }} />
+
+        
+        
       
         <p>{blog.category && `${blog.category.name}`}</p>
         </div>

@@ -1,13 +1,11 @@
 import { client } from "../../libs/client";
 import Seo from "../../components/Seo";
-import Layout from "../../components/Layout";
 import CategoryIndex from "../../components/CategoryIndex";
 import BlogItem from "../../components/BlogItem";
 
 export default function BlogId({ blog }) {
     return (
-      <Layout>
-
+    <>
         <Seo
         pageTitle={blog.title}
         pageDescription={blog.body}
@@ -16,20 +14,21 @@ export default function BlogId({ blog }) {
         // pageImgHeight={960}
       />
       <main className="container mx-auto">
-      <contaier className="flex flex-row">
+      <contaier className="md:flex flex-row">
 
-        <div className="basis-3/4">
+        <div className="p-8 md:p-0 basis-3/4">
           <BlogItem blog={blog}/>
         </div>
 
         <div className="basis-1/4">
+         
         
         </div>
 
       </contaier>   
  
       </main>
-      </Layout>
+    </>
     );
   }
 

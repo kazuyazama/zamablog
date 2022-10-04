@@ -1,7 +1,7 @@
 import { client } from "../../libs/client";
 import Link from "next/link";
 
-export default function CategoryId({ blog }) {
+export default function CategoryId({ blog ,category}) {
     if(blog.length === 0) {
         return <div>ブログコンテンツがありません</div>;
     }
@@ -40,3 +40,5 @@ export default function CategoryId({ blog }) {
         }
     }
   }
+
+  

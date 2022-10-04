@@ -4,3 +4,4 @@ export const client = createClient({
   serviceDomain: 'zamablog-nextjs',
   apiKey: process.env.API_KEY,
 });
+

@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const CategoryIndex = ({category}) => {
+const CategoryIndex = ({category}) => { 
     return (
         <div className="card">
           <ul className="card-body">

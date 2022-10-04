@@ -3,9 +3,9 @@ import Link from "next/link";
 
 const BlogIndex = ({blog}) => {
     return (
-        <div className="gap-8 columns-3">
+        <div className="md:gap-8 md:columns-3">
           {blog.map((blog) => (
-          <div key={blog.id} className="card bg-base-100 shadow-xl hover:-translate-y-3 transition delay-100">
+          <div key={blog.id} className="card bg-base-100 shadow-xl hover:-translate-y-3 transition delay-100 my-8 md:my-auto">
               <Link href={`/blog/${blog.id}`} >
                   <a><Image loader={({src}) => src} src={blog.image.url} alt={blog.title} width="400px" height="250px"/></a>
               </Link> 

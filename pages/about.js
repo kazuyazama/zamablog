@@ -1,17 +1,16 @@
 
 import Image from "next/image";
-import Layout from "../components/Layout";
+
 
 const About = () => {
     return (
         <>
-        <Layout>
-        <main className="container mx-auto">
-         <contaier className="flex flex-row justify-center">
+        <div className="container mx-auto">
+         <div className="md:flex flex-row justify-center px-8 md:px-auto">
          {/* <contaier className="grid grid-cols-8"> */}
         
 
-        <div className="basis-3/6">
+        <div className="pb-8 md:pb-auto basis-3/6">
         {/* <div className="col-span-4 col-start-2"> */}
             <h1 className="text-2xl pb-5">ざまのブログ</h1>
             <p className="leading-relaxed">座間和也（ざまかずや）現在28歳a</p>
@@ -36,17 +35,15 @@ const About = () => {
             こちらはただの勉強ブログなので見なくて大丈夫です。
             </p>
 
-
-
-           
+         
         </div>
 
-        <div className="basis-1/6 ">
+        <div className="basis-1/6">
 
         {/* <div className=""> */}
        
             
-         <div className="mockup-phone ">
+         <div className="mockup-phone">
         <div className="camera"></div> 
         <div className="display">
             <div className="artboard artboard-demo phone-1">
@@ -64,9 +61,9 @@ const About = () => {
 
        
 
-        </contaier>   
-        </main>
-        </Layout>
+        </div>   
+        </div>
+       
         </>
     );
 }
