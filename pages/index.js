@@ -14,6 +14,7 @@ export default function Home({blog,category}) {
 
         <div className="px-8 md:px-auto basis-3/4 ">
           <BlogIndex blog={blog} />
+         
 
         </div>
          
