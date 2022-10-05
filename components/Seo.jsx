@@ -26,6 +26,7 @@ const Seo = ({ pageTitle, pageDescription, pagePath, pageImg, pageImgWidth, page
       <meta property="og:image:width" content={String(imgWidth)} />
       <meta property="og:image:height" content={String(imgHeight)} />
       <link rel="canonical" href={url} />
+      
     </Head>
   );
 };
