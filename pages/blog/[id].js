@@ -4,6 +4,7 @@ import CategoryIndex from "../../components/CategoryIndex";
 import BlogItem from "../../components/BlogItem";
 import SearchForm from "../../components/SearchForm";
 
+
 export default function BlogId({ blog,category}) {
     return (
     <>

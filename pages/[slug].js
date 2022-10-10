@@ -1,3 +1,5 @@
+//プレビュー画面用
+
 import { client } from "../libs/client";
 import BlogItem from "../components/BlogItem";
 import SearchForm from "../components/SearchForm";
@@ -16,18 +18,11 @@ export default function Article({ blog, draftKey }) {
 
         <div className="p-8 md:p-0 basis-3/4">
           <BlogItem blog={blog}/>
-
         </div>
-
         <div className="basis-1/4">
-        
           <SearchForm />
-        
-        
         </div>
-
       </contaier>   
-
       </main>
 
     </ >
@@ -46,7 +41,6 @@ export const getStaticPaths = async () => {
  
 export const getStaticProps = async (context) => {
    
-
     const { params, previewData } = context
     if (!params?.slug) {
       throw new Error('Error: ID not found')
@@ -68,7 +62,6 @@ export const getStaticProps = async (context) => {
     /* draftKeyを付与してリクエストを投げる */
     try {
       const data = await client.getListDetail({
-        // endpoint:"categories"
         endpoint: "blog",
         contentId: slug,
         queries: draftKey
@@ -85,6 +78,5 @@ export const getStaticProps = async (context) => {
       return { notFound: true }
     }
    
-     
  
 }

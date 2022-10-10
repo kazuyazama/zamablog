@@ -23,7 +23,7 @@ const BlogItem = ({blog}) => {
 
         <div 
         dangerouslySetInnerHTML={{
-          __html:blog.body.map((item, i) => 
+          __html:blog.body.map((item) => 
             item.fieldId === 'richEditor' ? (
              `${item.richEditor}`
             ) : item.fieldId === 'html' ? (

@@ -52,7 +52,7 @@ const Form = () => {
         <label htmlFor="email">メールアドレス</label>
         <input type="email" id="email" placeholder="tanaka@gmail.com" className="input w-full mt-3" 
         {...register('email',{required:'メールアドレスを入力してください'})}/>
-        {errors.name && <div>{errors.name.message}</div>}
+        {errors.name && <div>{errors.email.message}</div>}
         </div>
 
         <div className="pb-5">
@@ -70,12 +70,10 @@ const Form = () => {
 
         </form>
  
-
         </div>
 
 
         </div>
-
 
         
         </>

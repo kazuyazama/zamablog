@@ -1,3 +1,5 @@
+//プレビュー画面にリダイレクトする為の処理
+
 import { client } from "../../libs/client";
 
 const preview = async (req, res) => {

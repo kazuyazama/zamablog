@@ -28,11 +28,6 @@ export default function Home({blog,category}) {
       </div>   
     </div>
 
-
-    
-    
-
-    
     </>
 
   )
