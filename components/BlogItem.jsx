@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Moment from "react-moment";
-import 'highlight.js/styles/night-owl.css';
 
-const BlogItem = ({blog,highlightedBody,toc}) => {
+const BlogItem = ({blog,toc}) => {
 
     return (
       <>
@@ -22,8 +21,6 @@ const BlogItem = ({blog,highlightedBody,toc}) => {
                 ))}
         </div>
 
-       
-
         {blog.toc_visible && (
            <div className="py-5 text-center " >
           <p className="pb-3 font-bold text-xl">目次</p>
@@ -42,8 +39,9 @@ const BlogItem = ({blog,highlightedBody,toc}) => {
 
         <div 
         dangerouslySetInnerHTML={{
-          __html:highlightedBody
-        }} />
+          __html:`${blog.body}`,
+        }} 
+        />
 
         
   
