@@ -34,7 +34,7 @@ export default function Article({ blog, draftKey }) {
 
 export const getStaticPaths = async () => {
   const data = await client.get({endpoint:"blog"});
-  const paths = data.contents.map((content) => `/blog/${content.slug}`);
+  const paths = data.contents.map((content) => `/${content.slug}`);
   return { paths, fallback: true };
 };
  
