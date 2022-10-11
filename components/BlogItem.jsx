@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Moment from "react-moment";
+import 'highlight.js/styles/night-owl.css';
 
-const BlogItem = ({blog}) => {
+const BlogItem = ({blog,highlightedBody,toc}) => {
 
     return (
+      <>
         <div>
-        {/* <img loader={({src}) => src} src={`${blog.image.url}?fm=webp`} alt={blog.title} className="py-5" /> */}
         <Image className="py-5 rounded" loader={({src}) => src} src={blog.image.url} alt={blog.title} width={800} height={500} layout="responsive" 
            />
 
@@ -21,20 +22,33 @@ const BlogItem = ({blog}) => {
                 ))}
         </div>
 
+       
+
+        {blog.toc_visible && (
+           <div className="py-5 text-center " >
+          <p className="pb-3 font-bold text-xl">目次</p>
+          <ul>
+            {toc.map(data => (
+              <li key={data.id} className="text-lg py-1 link link-hover text-primary-content">
+                <a href={`#${data.id}`}>
+                  {data.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+          </div>
+        )}
+
+
         <div 
         dangerouslySetInnerHTML={{
-          __html:blog.body.map((item) => 
-            item.fieldId === 'richEditor' ? (
-             `${item.richEditor}`
-            ) : item.fieldId === 'html' ? (
-              `${item.html}` 
-            ) : null )
+          __html:highlightedBody
         }} />
 
         
-        
   
         </div>
+        </>
     );
 }
 

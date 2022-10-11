@@ -5,6 +5,7 @@ import CategoryIndex from "../../components/CategoryIndex";
 import Seo from "../../components/Seo";
 
 export default function CategoryId({  blog ,category }) {
+    console.log(blog)
     if(blog.length === 0) {
         return <div className="container mx-auto text-center">ブログコンテンツがありません</div>;
     }
@@ -15,12 +16,13 @@ export default function CategoryId({  blog ,category }) {
       <div className="md:flex flex-row">
        
         <div className="px-8 md:px-auto basis-3/4 ">
-     
-        {blog.map((category) => (
-          <div key={category.id} className="pb-5">
+
+
+        <div key={category.id} className="pb-5">
               <h1 className="border-b-2 pl-2">{`カテゴリ：${blog[0].category.name}`}</h1> 
-          </div>
-        ))}  
+        </div>
+  
+      
         
           <BlogIndex blog={blog} />
         </div>

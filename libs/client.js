@@ -1,3 +1,5 @@
+//microcms 管理パスなど
+
 import { createClient } from 'microcms-js-sdk';
 
 export const client = createClient({

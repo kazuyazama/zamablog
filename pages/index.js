@@ -4,8 +4,6 @@ import CategoryIndex from "../components/CategoryIndex";
 import SearchForm from "../components/SearchForm";
 import Seo from "../components/Seo";
 
-
-
 export default function Home({blog,category}) {
   return (
     <>

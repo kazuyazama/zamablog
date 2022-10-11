@@ -1,11 +1,28 @@
 import { client } from "../../libs/client";
+import * as cheerio from 'cheerio';
+import hljs from 'highlight.js';
 import Seo from "../../components/Seo";
 import CategoryIndex from "../../components/CategoryIndex";
 import BlogItem from "../../components/BlogItem";
 import SearchForm from "../../components/SearchForm";
 
+export default function BlogId({ blog,category,highlightedBody}) {
 
-export default function BlogId({ blog,category}) {
+
+  //目次作成用
+  const renderToc = (body) => {
+      const $ = cheerio.load(body);
+      const headings = $('h1, h2, h3').toArray();
+      const toc = headings.map((data) => ({
+        text:data.children[0].children[0].data,
+        id: data.attribs.id
+      }));
+  
+    return toc;
+  };
+  
+  const toc = renderToc(blog.body);
+  
     return (
     <>
         <Seo  
@@ -17,7 +34,7 @@ export default function BlogId({ blog,category}) {
       <contaier className="md:flex flex-row">
 
         <div className="p-8 md:p-0 basis-3/4">
-          <BlogItem blog={blog}/>
+          <BlogItem blog={blog} highlightedBody={highlightedBody} toc={toc}/>
     
         </div>
 
@@ -47,14 +64,25 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context) => {
   const id = context.params.id;
   const data = await client.get({endpoint:"blog",contentId:id});
-  
-    
-// カテゴリーコンテンツの取得
+
+
+
+  // シンタックスハイライト
+    const $ = cheerio.load(data.body);    
+  $('pre code').each((_, elm) => {
+    const result = hljs.highlightAuto($(elm).text());
+    $(elm).html(result.value);
+    $(elm).addClass('hljs');
+  });
+
+  // カテゴリーコンテンツの取得
   const categoryData = await client.get({endpoint:"categories"})
+  
   return {
       props:{
           blog:data,
           category:categoryData.contents,
+          highlightedBody:$.html()
       }
   }
 }
