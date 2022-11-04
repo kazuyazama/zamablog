@@ -2,7 +2,7 @@ import Head from 'next/head';
 
 const Seo = ({ pageTitle, pageDescription, pagePath, pageImg, pageImgWidth, pageImgHeight }) => {
   const defaultTitle = 'ざまのブログ';
-  const defaultDescription = '28歳、経営者です。通信業界に10年携わっておりましたが、大きく舵を切ろうとしています。なのでこの際、通信業界の見えない部分などを全て全て公開していこうと思います。主に通信、ローカル情報、プログラミングなどで地味に役立つ情報を発信していきます。';
+  const defaultDescription = '28歳、経営者です。プログラミング歴６ヶ月の駆け出しです。プログラミングで学んだ情報などを保存するノートがてら発信していきます。';
   const defautlImg = '/logo.png';
 
   const title = pageTitle ? `${pageTitle} | ${defaultTitle}` : defaultTitle;

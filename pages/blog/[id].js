@@ -1,9 +1,12 @@
 import { client } from "../../libs/client";
 import * as cheerio from 'cheerio';
+import hljs from 'highlight.js';
 import Seo from "../../components/Seo";
 import CategoryIndex from "../../components/CategoryIndex";
 import BlogItem from "../../components/BlogItem";
 import SearchForm from "../../components/SearchForm";
+
+import 'highlight.js/styles/night-owl.css';
 
 // export default function BlogId({ blog,category}) {
 
@@ -19,7 +22,6 @@ import SearchForm from "../../components/SearchForm";
   
 //     return toc;
 //   };
-
 
 
   
@@ -64,16 +66,36 @@ export const getStaticPaths = async () => {
 }
 
 
-
 // データをテンプレートに受け渡す部分の処理を記述します
 export const getStaticProps = async (context) => {
   const id = context.params.id;
   const data = await client.get({endpoint:"blog",contentId:id});
+  
   // const data = await client.get({endpoint:"blog",contentId:params?.id ?? ''});
 
   // カテゴリーコンテンツの取得
   const categoryData = await client.get({endpoint:"categories"})
+
   
+  // ショートコードをリッチエディタに埋め込む為の関数
+ const replaceBody = ({ body, shortCodes,}) => {
+
+  // ショートコードを作るための式
+  const shortCodesMap = shortCodes?.reduce((res, { code,body}) => ({ ...res, [code]:body}),{} ) ?? {}
+
+  //シンタックスハイライト式
+  const $ = cheerio.load(body);
+  $('pre code').each((_, elm) => {
+   const result = hljs.highlightAuto($(elm).text());
+   $(elm).html(result.value);
+   $(elm).addClass('hljs');
+  });
+  
+  // シンタックスハイライトしたbody($.html)の中から、識別コードを正規表現でマッチさせ、元に返す
+  return $.html().replace(/&lt;&lt;(.+?)&gt;&gt;/g, (...[, key]) => shortCodesMap[key])
+
+}
+
   return {
     props:{
         category:categoryData.contents,
@@ -84,23 +106,14 @@ export const getStaticProps = async (context) => {
         } 
       },
       revalidate: 3600
+      
   }
-}
 
-// ショートコードをリッチエディタに埋め込む為の関数
-export const replaceBody = ({ body, shortCodes }) => {
-  console.log(shortCodes)
-  const shortCodesMap =
-    shortCodes?.reduce(
-      (res, { code, body }) => ({ ...res, [code]: body }),
-      {}
-    ) ?? {}
-  return body
-    .replace(/&lt;&lt;(.+?)&gt;&gt;/g, (...[, key]) => shortCodesMap[key])
 }
 
 
-export default function BlogId({category,data}) {
+
+export default function BlogId({category,data,}) {
 
 
   //目次作成用

@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Moment from "react-moment";
 
-const BlogItem = ({blog,toc}) => {
+const BlogItem = ({blog,toc,}) => {
+
+    console.log(blog)
 
     return (
       <>
@@ -78,14 +80,10 @@ const BlogItem = ({blog,toc}) => {
           </div>
         )}
 
-
-
-        
-
-    
+ 
         <div 
         dangerouslySetInnerHTML={{
-          __html: `${blog.body}`,
+          __html: `${blog.body} `,
           
         }} 
         />
