@@ -4,7 +4,7 @@ function Gtag() {
   return (
     <div className="container">
       {/* Global site tag (gtag.js) - Google Analytics  */}
-      <Script
+      {/* <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-ZBXC17H71W"
         strategy="afterInteractive"
       />
@@ -16,7 +16,7 @@ function Gtag() {
       
         gtag('config', 'G-ZBXC17H71W');
         `}
-      </Script>
+      </Script> */}
     </div>
   )
 }

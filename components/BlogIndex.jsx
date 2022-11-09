@@ -14,8 +14,8 @@ const BlogIndex = ({blog}) => {
               <Link href={`/blog/${blog.id}`}>
                   <a className="card-title text-lg">{blog.title}</a>
               </Link>
-              <p className="text-sm py-2">{blog.description}</p>
-              <div className="card-actions justify-end ">
+              <p className="text-sm py-2 ">{blog.description}</p>
+              <div className="card-actions justify-end">
                 {blog.tags.map((tag) => (
                     <div className="badge badge-accent text-xs" key={tag}>{tag}</div> 
                 ))}
