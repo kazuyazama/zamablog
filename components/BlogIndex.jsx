@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const BlogIndex = ({blog}) => {
     return (
-        <div className="md:gap-8 md:columns-3">
+        <div className="md:gap-8 md:columns-3 md:space-y-10">
           {blog.map((blog) => (
           <div key={blog.id} className="card h-auto shadow-xl hover:-translate-y-3 transition delay-100 my-8 md:my-auto pb-2">
               <Link href={`/blog/${blog.id}`} >
