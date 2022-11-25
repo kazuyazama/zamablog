@@ -1,15 +1,14 @@
 import { client } from "../../libs/client";
-import * as cheerio from 'cheerio';
-import hljs from 'highlight.js';
+import * as cheerio from "cheerio";
+import hljs from "highlight.js";
 import Seo from "../../components/Seo";
 import CategoryIndex from "../../components/CategoryIndex";
 import BlogItem from "../../components/BlogItem";
 import SearchForm from "../../components/SearchForm";
 
-import 'highlight.js/styles/night-owl.css';
+import "highlight.js/styles/night-owl.css";
 
 // export default function BlogId({ blog,category}) {
-
 
 //   //目次作成用
 //   const renderToc = (body) => {
@@ -19,18 +18,16 @@ import 'highlight.js/styles/night-owl.css';
 //         text: data.children[0].data ,
 //         id: data.attribs.id
 //       }));
-  
+
 //     return toc;
 //   };
 
-
-  
 //   const toc = renderToc(blog.body);
 //   // console.log(toc)
-  
+
 //     return (
 //     <>
-//         <Seo  
+//         <Seo
 //         pageTitle={blog.title}
 //         pageDescription={blog.description}
 //         pageImg={blog.image.url}
@@ -40,17 +37,16 @@ import 'highlight.js/styles/night-owl.css';
 
 //         <div className="p-8 md:p-0 basis-3/4">
 //           <BlogItem blog={blog} toc={toc}/>
-    
+
 //         </div>
 
 //         <div className="basis-1/4">
 //           <CategoryIndex category={category}/>
 //           <SearchForm />
-        
-        
+
 //         </div>
 
-//       </contaier>   
+//       </contaier>
 
 //       </main>
 //     </>
@@ -59,179 +55,158 @@ import 'highlight.js/styles/night-owl.css';
 
 // 静的生成のためのパスを指定します
 export const getStaticPaths = async () => {
-  const data = await client.get({endpoint:"blog"});
+  const data = await client.get({ endpoint: "blog" });
   const paths = data.contents.map((content) => `/blog/${content.id}`);
-  return {paths,fallback:false}
-  
-}
-
+  return { paths, fallback: false };
+};
 
 // データをテンプレートに受け渡す部分の処理を記述します
 export const getStaticProps = async (context) => {
   const id = context.params.id;
-  const data = await client.get({endpoint:"blog",contentId:id});
-  
+  const data = await client.get({ endpoint: "blog", contentId: id });
+
   // const data = await client.get({endpoint:"blog",contentId:params?.id ?? ''});
 
   // カテゴリーコンテンツの取得
-  const categoryData = await client.get({endpoint:"categories"})
+  const categoryData = await client.get({ endpoint: "categories" });
 
-  
   // ショートコードをリッチエディタに埋め込む為の関数
- const replaceBody = ({ body, shortCodes,}) => {
+  const replaceBody = ({ body, shortCodes }) => {
+    // ショートコードを作るための式
+    const shortCodesMap =
+      shortCodes?.reduce(
+        (res, { code, body }) => ({ ...res, [code]: body }),
+        {}
+      ) ?? {};
 
-  // ショートコードを作るための式
-  const shortCodesMap = shortCodes?.reduce((res, { code,body}) => ({ ...res, [code]:body}),{} ) ?? {}
+    //シンタックスハイライト式
+    const $ = cheerio.load(body);
+    $("pre code").each((_, elm) => {
+      const result = hljs.highlightAuto($(elm).text());
+      $(elm).html(result.value);
+      $(elm).addClass("hljs");
+    });
 
-  //シンタックスハイライト式
-  const $ = cheerio.load(body);
-  $('pre code').each((_, elm) => {
-   const result = hljs.highlightAuto($(elm).text());
-   $(elm).html(result.value);
-   $(elm).addClass('hljs');
-  });
-  
-  // シンタックスハイライトしたbody($.html)の中から、識別コードを正規表現でマッチさせ、元に返す
-  return $.html().replace(/&lt;&lt;(.+?)&gt;&gt;/g, (...[, key]) => shortCodesMap[key])
-
-}
+    // シンタックスハイライトしたbody($.html)の中から、識別コードを正規表現でマッチさせ、元に返す
+    return $.html().replace(
+      /&lt;&lt;(.+?)&gt;&gt;/g,
+      (...[, key]) => shortCodesMap[key]
+    );
+  };
 
   return {
-    props:{
-        category:categoryData.contents,
-        // blog:data,
-        data:{       //このデータはこの記事参考に作った　https://zenn.dev/aiji42/articles/46ac448d95e847
-          ...data,
-          body:replaceBody(data),
-        } 
+    props: {
+      category: categoryData.contents,
+      // blog:data,
+      data: {
+        //このデータはこの記事参考に作った　https://zenn.dev/aiji42/articles/46ac448d95e847
+        ...data,
+        body: replaceBody(data),
       },
-      revalidate: 3600
-      
-  }
+    },
+    revalidate: 3600,
+  };
+};
 
-}
-
-
-
-export default function BlogId({category,data,}) {
-
-
+export default function BlogId({ category, data }) {
   //目次作成用
   const renderToc = (body) => {
-      const $ = cheerio.load(body);
-      const headings = $('h1, h2, h3').toArray();
-      const toc = headings.map((data) => ({
-        text: data.children[0].data ,
-        id: data.attribs.id
-      }));
-  
+    const $ = cheerio.load(body);
+    const headings = $("h1, h2, h3").toArray();
+    const toc = headings.map((data) => ({
+      text: data.children[0].data,
+      id: data.attribs.id,
+    }));
+
     return toc;
   };
 
-  
   const toc = renderToc(data.body);
   // console.log(toc)
-  
-    return (
+
+  return (
     <>
-        <Seo  
+      <Seo
         pageTitle={data.title}
         pageDescription={data.description}
         pageImg={data.image.url}
-        />
+      />
       <main className="container mx-auto">
-      <contaier className="md:flex flex-row">
+        <contaier className="md:flex flex-row">
+          <div className="p-8 md:p-0 basis-3/4">
+            <BlogItem
+              blog={data}
+              toc={toc}
+              // toc={toc}
+            />
+          </div>
 
-        <div className="p-8 md:p-0 basis-3/4">
-          <BlogItem blog={data} toc={toc} 
-          // toc={toc}
-          />
-    
-        </div>
-
-        <div className="basis-1/4">
-          <CategoryIndex category={category}/>
-          <SearchForm />
-        
-        
-        </div>
-
-      </contaier>   
-
+          <div className="basis-1/4">
+            <CategoryIndex category={category} />
+            <SearchForm />
+          </div>
+        </contaier>
       </main>
     </>
-    );
+  );
 }
 
+// // 静的生成のためのパスを指定します
+// export const getStaticPaths = async () => {
+//   const data = await client.get({endpoint:"blog"});
+//   const paths = data.contents.map((content) => `/blog/${content.id}`);
+//
+//   return {paths,fallback:true}
+// }
 
+// // データをテンプレートに受け渡す部分の処理を記述します
+// export const getStaticProps = async (context) => {
 
+//  // カテゴリーコンテンツの取得
+//  const categoryData = await client.get({endpoint:"categories"})
+//  return {
+//      props:{
+//          blog:data,
+//          category:categoryData.contents,
+//      }
+//  }
 
+//   const { params, previewData } = context
+//   if (!params?.id) {
+//     throw new Error('Error: ID not found')
+//   }
 
+//   const isDraft = (arg) => {
+//     if (!arg?.draftKey) {
+//       return false
+//     }
+//     return typeof arg.draftKey === 'string'
+//   }
 
+//   const id = params.id;
+//   /* requestのクエリパラメータを生成*/
+//   const draftKey = isDraft(previewData)
+//     ? { draftKey: previewData.draftKey }
+//     : {}
 
-    // // 静的生成のためのパスを指定します
-    // export const getStaticPaths = async () => {
-    //   const data = await client.get({endpoint:"blog"});
-    //   const paths = data.contents.map((content) => `/blog/${content.id}`);
-    //  
-    //   return {paths,fallback:true}
-    // }
-  
-    // // データをテンプレートに受け渡す部分の処理を記述します
-    // export const getStaticProps = async (context) => {
-   
+//   /* draftKeyを付与してリクエストを投げる */
+//   try {
+//     const data = await client.getListDetail({
+//       // endpoint:"categories"
+//       endpoint: "blog",
+//       contentId: id,
+//       queries: draftKey
+//     });
+//     return {
+//       props: {
+//         blog: data,
+//         ...draftKey,
 
-      //  // カテゴリーコンテンツの取得
-      //  const categoryData = await client.get({endpoint:"categories"})
-      //  return {
-      //      props:{
-      //          blog:data,
-      //          category:categoryData.contents,
-      //      }
-      //  }
+//       },
+//     };
+//   } catch (e) {
+//     /* 失敗したら404 */
+//     return { notFound: true }
+//   }
 
-    //   const { params, previewData } = context
-    //   if (!params?.id) {
-    //     throw new Error('Error: ID not found')
-    //   }
-    
-    //   const isDraft = (arg) => {
-    //     if (!arg?.draftKey) {
-    //       return false
-    //     }
-    //     return typeof arg.draftKey === 'string'
-    //   }
-    
-    //   const id = params.id;
-    //   /* requestのクエリパラメータを生成*/
-    //   const draftKey = isDraft(previewData)
-    //     ? { draftKey: previewData.draftKey }
-    //     : {}
-    
-    //   /* draftKeyを付与してリクエストを投げる */
-    //   try {
-    //     const data = await client.getListDetail({
-    //       // endpoint:"categories"
-    //       endpoint: "blog",
-    //       contentId: id,
-    //       queries: draftKey
-    //     });
-    //     return {
-    //       props: {
-    //         blog: data,
-    //         ...draftKey,
-          
-    //       },
-    //     };
-    //   } catch (e) {
-    //     /* 失敗したら404 */
-    //     return { notFound: true }
-    //   }
-     
-       
-   
-    // }
-  
-
-
-  
+// }
