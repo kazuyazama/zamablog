@@ -15,7 +15,7 @@ const About = () => {
         {/* <div className="col-span-4 col-start-2"> */}
             <h1 className="text-2xl pb-5">ざまのブログ</h1>
 
-            <p className="leading-relaxed">フロントエンドエンジニア。</p>
+            <p className="leading-relaxed">フロントエンドエンジニア1年目。</p>
             <p className="leading-relaxed"></p>
             <h2 className="pt-2">躓いたところとか、<br />勉強用と誰かの役にたてば。</h2>
            
